@@ -6,13 +6,10 @@ import (
 	"gorm.io/gorm"
 )
 
-type Client struct {
+type Category struct {
 	gorm.Model
 	ID        uint
 	Name      string
-	Email     string `gorm:"uniqueIndex, length:50"`
-	Document  string
-	Password  string `gorm:"uniqueIndex, length:50"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }

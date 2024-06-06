@@ -15,7 +15,7 @@ func InitDB() *gorm.DB {
 		panic(err)
 	}
 
-	models := []any{models.Sales{}, models.Client{}}
+	models := []any{models.Sales{}, models.Client{}, models.Category{}, models.Product{}}
 
 	autoMigrate(models, db)
 

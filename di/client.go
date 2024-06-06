@@ -11,7 +11,8 @@ import (
 func ClientDI(db *gorm.DB) *controllers.ClientController {
 	repository := repositories.NewClientRepository(db)
 	jwtLogin := utils.NewJwtLogin()
-	service := services.NewClientsService(repository, jwtLogin)
+	bcrypt := utils.NewBcrypt()
+	service := services.NewClientsService(repository, jwtLogin, bcrypt)
 	controller := controllers.NewClientController(*service)
 
 	return controller

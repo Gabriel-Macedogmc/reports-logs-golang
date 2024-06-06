@@ -20,6 +20,7 @@ func (c *clientRepository) Create(data dto.CreateClient) (*models.Client, error)
 		Name:     data.Name,
 		Email:    data.Email,
 		Document: data.Document,
+		Password: data.Password,
 	}
 
 	c.db.Create(&user)
@@ -31,6 +32,6 @@ func (c *clientRepository) Create(data dto.CreateClient) (*models.Client, error)
 func (c *clientRepository) GetByEmail(email string) *models.Client {
 	client := models.Client{}
 
-	c.db.Select("id", "name", "email").Where("email = ?", email).Find(&client)
+	c.db.Select("id", "name", "email", "password").Where("email = ?", email).Find(&client)
 	return &client
 }

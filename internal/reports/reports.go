@@ -18,13 +18,15 @@ func GenerateDailyReport(data []dto.ReportDTO) {
 	pdf.Cell(40, 10, tr("Relatório Diário de Vendas"))
 	pdf.SetFont("Arial", "", 12)
 
-	for _, sale := range data {
-		line := fmt.Sprintf("Venda ID: %d, Produto ID: %d, Cliente ID: %d, Quantidade: %d, Data: %s",
-			sale.Id, sale.ProductId, sale.ClientId, sale.Quantity, sale.Date.Format("01-01-2006"))
+	go func() {
+		for _, sale := range data {
+			line := fmt.Sprintf("Venda ID: %d, Produto ID: %d, Cliente ID: %d, Quantidade: %d, Data: %s",
+				sale.Id, sale.ProductId, sale.ClientId, sale.Quantity, sale.Date.Format("01-01-2006"))
 
-		pdf.Ln(10)
-		pdf.Cell(40, 10, line)
-	}
+			pdf.Ln(10)
+			pdf.Cell(40, 10, line)
+		}
+	}()
 
 	err := pdf.OutputFileAndClose("relatorio_diario.pdf")
 	if err != nil {

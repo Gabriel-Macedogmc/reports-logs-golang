@@ -19,11 +19,15 @@ func main() {
 	r := gin.Default()
 
 	clientController := di.ClientDI(db)
+	categoryController := di.CategoryDI(db)
+	productController := di.ProductDI(db)
 
 	publicRoutes := r.Group("/public")
 	{
 		publicRoutes.POST("/client", clientController.Create)
 		publicRoutes.POST("/client/login", clientController.Login)
+		publicRoutes.POST("/category", categoryController.Create)
+		publicRoutes.POST("/product", productController.Create)
 
 		r.GET("/ping", func(c *gin.Context) {
 			c.JSON(200, gin.H{
